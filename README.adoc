@@ -5,7 +5,7 @@ NOTE: TP de deux slots de 1h20
 ## Nom des étudiants de ce binôme 
 WARNING: NE PAS OUBLIER DE MENTIONNER LES DEUX NOMS !
 
-#XXX# et #YYY#
+#Quentin Billy# et #Pierre Fouillet#
 
 Commentaires éventuels des étudiants : #XXXXXX#
 
@@ -50,9 +50,15 @@ _Temps estimé : 1 h_
 
 IMPORTANT: [Question]  Que constatez-vous  en terme de découpage du code ? Imaginez un projet d'entreprise constitué de centaines de classes ainsi structuré. Que risque-t-il d'arriver ?
 
+Toutes les classes se situe dans un seul et même package. Étant données le faible dimension de ce projet cela n’a pas de réel importance. Cependant, avec un projet d’entreprise constitué de centaines de classes, sa maintenance deviendrai quasi impossible car aucun découpage n’a été réalisé. 
+
 IMPORTANT: [Question]  Que se passe-t-il si l'on renomme une colonne de la base de donnée ?
 
-IMPORTANT: [Question]  Où se trouve le code métier (voir la règle de gestion RG1) ? cette règle est-elle facilement testable par un test unitaire ? 
+Dans le fichier `application.properties`, nous retrouvons la ligne `spring.jpa.hibernate.ddl-auto = update` qui implique la création des tables et des colonnes que l'on a modifié, mais ne supprimera jamais de données. C’est pourquoi un renommage d’une colonne de la base de donnée va créer une nouvelle colonne, mais garder l’ancienne avec les informations qu’elle contient.
+
+IMPORTANT: [Question]  Où se trouve le code métier (voir la règle de gestion RG1) ? cette règle est-elle facilement testable par un test unitaire ?
+
+Le code métier se trouve dans le contrôleur du projet :  `TodoListController`. Afin de tester cette règle avec un test unitaire, nous aurons besoins de mocker la persitance des données.
 
 * Lancer une base PostgreSQL en Docker :
 ```bash
@@ -60,9 +66,22 @@ docker run --rm -it -e POSTGRES_PASSWORD=password -p 5432:5432 postgres
 ```
 IMPORTANT: [Question]  Expliquer cette ligne de commande (y compris les options utilisées)
 
+* `docker run` permet de créer des conteneurs.
+* `--rm` permet à Docker de supprimer automatiquement le conteneur lors de l'arrêt.
+* `-it` permet exécuter Docker de manière interactive.
+* `-e` définit des paires de valeurs à définir dans l'environnement du conteneur au démarrage.
+* `POSTGRES_PASSWORD` indique le mot de passe de postgres.
+* `-p` définit le port de l'hôte au conteneur.
+* `postgres` est l’image lancé par Docker.
+
+
+
+
 * Compléter le code manquant dans la méthode `TodoListController.createTodoItem()`
 
 * Pourquoi `todoItemRepository` est-il `null` ? Quelle est la meilleure façon de l'injecter ? Modifier le code en conséquence.
+todoItemRepository n'est pas instancier. Il faut donc créer une injection de dépendance à l'aide de Spring.
+
 
 * Tester vos endpoints avec un client REST.
 
