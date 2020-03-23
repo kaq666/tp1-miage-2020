@@ -124,3 +124,18 @@ IMPORTANT: [Question] Avec quel pattern est implémenté ici le principe d'inver
 IMPORTANT: [Question] Qu'est ce que l'anti-pattern domaine anémique ? à quoi le reconnaît-on ? Est-il courant dans les modèles en couche classiques ? L'architecture hexagonale change-t-elle cette situation ?
 
 Complétez ce code avec une fonctionnalité de création de `TodoItem`  persisté en base et appelé depuis un endpoint REST `POST /todos` qui renvoi un code `201` en cas de succès. La fonctionnalité à implémenter est contractualisée par le port d'entrée `AjouterTodoItems`.
+
+---
+
+# Exercice 3 - Ecriture de tests
+_Temps estimé : 20 mins_
+
+* Rester sur le même code que l'exercice 2
+
+* Implémentez (en junit) des TU sur la règle de gestion qui consiste à afficher `[LATE!]` dans la description d'un item en retard de plus de 24h.
+
+IMPORTANT: [Question] Quels types de tests devra-t-on écrire pour les adapteurs ? 
+
+IMPORTANT: [Question] Que teste-on dans ce cas ? 
+
+* S'il vous reste du temps, écrivez quelques uns de ces types de test.
