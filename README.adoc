@@ -118,7 +118,24 @@ L’architecture hexagonale s’appuie sur trois grands principes :
     - les dépendances vont vers le domaine (Le domaine ne dépend pas du côté application, mais le côté application dépend du côté domaine)
     - on isole les frontières par les ports et adapters (Le code applicatif pilote le code métier à travers une interface définie dans le code métier)
     
+    `@Component
+    public class AjouterTodoItemsService implements AjouterTodoItems {
+
+        private UpdateTodoItem updateTodoItem;
+
+        @Inject
+        public AjouterTodoItemsService(UpdateTodoItem updateTodoItem) {
+            this.updateTodoItem = updateTodoItem;
+        }
+
+        @Override
+        public void addTodoItem(TodoItem item) {
+            this.updateTodoItem.storeNewTodoItem(item);
+        }
+
+    }`
     
+    On vois dans cet extrait de code source que l'on injecte la dépendance updateTodoItem pour bien séparer le domaine de l'application, sans faire un new AjouterTodoItemsService.
     
 Complétez ce code avec une fonctionnalité de création de `TodoItem`  persisté en base et appelé depuis un endpoint REST `POST /todos` qui renvoi un code `201` en cas de succès. La fonctionnalité à implémenter est contractualisée par le port d'entrée `AjouterTodoItems`.
 
@@ -130,12 +147,10 @@ _Temps estimé : 20 mins_
 * Implémentez (en junit) des TU sur la règle de gestion qui consiste à afficher `[LATE!]` dans la description d'un item en retard de plus de 24h.
 
 *Quels types de tests devra-t-on écrire pour les adapteurs ?* 
-
 `Pour tester les adapteurs il faudrait écrire des tests d'intégration.`
 
 *Que teste-on dans ce cas ?*
-
-`Dans le cas de tests d'intégration on test les interactions du programme avec l'extérieur. `
+`Dans le cas de tests d'intégration on test les interactions du programme avec l'extérieur.`
 
 *S'il vous reste du temps, écrivez quelques uns de ces types de test.*
 
