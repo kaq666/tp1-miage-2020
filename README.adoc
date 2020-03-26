@@ -73,9 +73,10 @@ IMPORTANT: [Question]  Expliquer cette ligne de commande (y compris les options 
 
 * Compléter le code manquant dans la méthode `TodoListController.createTodoItem()`
 
-* Pourquoi `todoItemRepository` est-il `null` ? Quelle est la meilleure façon de l'injecter ? Modifier le code en conséquence.
+IMPORTANT: [Question] Pourquoi `todoItemRepository` est-il `null` ? Quelle est la meilleure façon de l'injecter ? Modifier le code en conséquence.
 todoItemRepository n'est pas instancié. Il faut donc créer une injection de dépendance à l'aide de Spring avec l'annotation @inject.
 
+todoItemRepository n'a pas encore été instancié, c’est pourquoi nous obtenons une erreur de type nullPointerException. Il faut alors ajouté l’annotation @Inject pour que l'instanciacion se fasse.
 
 * Tester vos endpoints avec un client REST.
 
